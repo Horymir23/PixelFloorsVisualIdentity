@@ -15,11 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
             resetAllColumns();
 
             if (!isExpanded) {
-                // Expand clicked column
+                // Expand clicked column - Start width animation
                 clickedColumn.classList.remove('col-md-4');
                 clickedColumn.classList.add('col-md-6');
-                clickedCard.classList.add('expanded');
-                button.classList.add('active'); // Rotate icon
+                button.classList.add('active'); // Rotate/Transform icon
+
+                // Delay the layout switch (Split View) until width is substantial
+                // This prevents "height explosion" where split content squishes into narrow col
+                if (clickedCard.dataset.expandTimeout) {
+                    clearTimeout(clickedCard.dataset.expandTimeout);
+                }
+
+                clickedCard.dataset.expandTimeout = setTimeout(() => {
+                    clickedCard.classList.add('expanded');
+                }, 350); // 350ms delay (CSS width transition is 500ms)
 
                 // Shrink siblings
                 const allColumns = document.querySelectorAll('.glass-card');
@@ -39,8 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const allCardElements = document.querySelectorAll('.glass-card');
         allCardElements.forEach(card => {
             const col = card.parentElement;
+
+            // Clear any pending expansion
+            if (card.dataset.expandTimeout) {
+                clearTimeout(card.dataset.expandTimeout);
+                delete card.dataset.expandTimeout;
+            }
+
             col.classList.remove('col-md-6', 'col-md-3');
             col.classList.add('col-md-4');
+            // Remove expanded layout immediately for collapse
             card.classList.remove('expanded', 'shrunk');
 
             // Reset button icon state

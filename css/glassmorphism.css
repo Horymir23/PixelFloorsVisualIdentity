@@ -139,8 +139,9 @@ body {
 .glass-card {
   position: relative;
   width: 100%;
-  height: 550px;
-  padding: 40px 30px;
+  min-height: 550px;
+  height: auto;
+  padding: 40px 30px 30px;
   background: rgba(255, 255, 255, 0.25);
   /* More opaque for light bg */
   backdrop-filter: blur(var(--glass-blur));
@@ -150,36 +151,89 @@ body {
   box-shadow:
     0 8px 32px 0 rgba(31, 38, 135, 0.15),
     inset 0 0 0 1px rgba(255, 255, 255, 0.4);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-areas:
+    "badge"
+    "image"
+    "content"
+    "footer";
+  grid-template-rows: auto auto 1fr auto;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  /* Flex properties for expansion */
+  transition: background 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* Explicitly transition only visual props to avoid height jump animation */
 }
 
 .glass-card.expanded {
   background: rgba(255, 255, 255, 0.35);
   box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.25);
   z-index: 10;
+  padding: 0;
+  /* Remove padding to let image touch edges */
+  grid-template-columns: 40% 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "image badge"
+    "image content"
+    "image footer";
+}
+
+.glass-card.expanded .image-strip {
+  grid-area: image;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card.expanded .badge {
+  grid-area: badge;
+  margin: 40px 30px 30px 30px;
+  /* Restore padding visually */
+}
+
+.glass-card.expanded .content-bottom {
+  grid-area: content;
+  padding: 0 30px 0 30px;
+  /* Removed vertical padding */
+}
+
+.glass-card.expanded .expand-button-wrapper {
+  padding: 0 30px 30px 30px;
+  /* Match content horizontal, add bottom space */
 }
 
 .glass-card.shrunk {
   opacity: 0.8;
+  padding: 40px 15px 15px;
+  /* Reduce horizontal padding in narrow column */
+}
+
+.glass-card.shrunk .card-title {
+  font-size: 1.8rem;
+  /* Smaller title for narrow column */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.glass-card.shrunk .card-description {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .glass-card:hover {
   /* Only apply hover lift if not interacting with states */
-  transform: translateY(-5px);
+  /*transform: translateY(-5px);*/
+  box-shadow: 0 15px 40px -5px color-mix(in srgb, var(--phantom-mist), transparent 50%), 0 0 20px -5px color-mix(in srgb, var(--phantom-mist), transparent 50%);
+  border-color: color-mix(in srgb, var(--phantom-mist), transparent 50%);
 }
 
 .glass-card.shrunk:hover {
-  transform: translateY(-5px);
   opacity: 1;
-}
-
-.glass-card.expanded:hover {
-  transform: translateY(-5px);
 }
 
 /* Badge */
@@ -196,6 +250,8 @@ body {
   align-self: flex-start;
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--obsidian-ink);
+  grid-area: badge;
+  justify-self: start;
 }
 
 .image-strip {
@@ -210,6 +266,7 @@ body {
   box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   /* Ensure image doesn't overflow rounded corners */
+  grid-area: image;
 }
 
 .strip-img {
@@ -222,11 +279,9 @@ body {
 }
 
 .content-bottom {
-  margin-top: auto;
-  /* Push to bottom */
-  padding-bottom: 20px;
-  /* Space for button if needed, or visual breathing room */
-  padding-right: 20px;
+  /* Push to bottom removed to stick to image/badge */
+  margin-bottom: 24px;
+  grid-area: content;
 }
 
 /* Headline */
@@ -266,6 +321,19 @@ body {
   font-size: calc(2.5rem / 1.618);
   line-height: 1.2;
   margin-bottom: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glass-card.expanded .card-description {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
 }
 
 /* Decorative Stripe */
@@ -308,10 +376,23 @@ body {
 }
 
 /* Expand Button */
+.expand-button-wrapper {
+  grid-area: footer;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  /* Padding removed as requested */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 .expand-button {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
+  /* Position reset to sit in wrapper */
+  position: relative;
+  bottom: auto;
+  right: auto;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -358,15 +439,26 @@ body {
 .col-md-4,
 .col-md-6,
 .col-md-3 {
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: flex-basis 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    max-width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Icon Rotation */
-.expand-button.active svg {
-  transform: rotate(180deg);
-  transition: transform 0.3s ease;
+/* Icon Toggling */
+.expand-button .icon-expand,
+.expand-button .icon-collapse {
+  transition: opacity 0.3s ease;
+  transform-origin: center;
 }
 
-.expand-button svg {
-  transition: transform 0.3s ease;
+.expand-button .icon-collapse {
+  opacity: 0;
+}
+
+.expand-button.active .icon-expand {
+  opacity: 0;
+}
+
+.expand-button.active .icon-collapse {
+  opacity: 1;
 }
