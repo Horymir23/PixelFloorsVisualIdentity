@@ -39,28 +39,27 @@ body {
   background: var(--phantom-mist);
   font-family: 'Wotfard', sans-serif;
   color: var(--text-primary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll from overflowing animations */
 }
 
+/* Background Animation */
 .background-animation {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-  overflow: hidden;
+  /* overflow: hidden; Removed to let animation extend outside section */
 }
 
 .bg-layer {
   position: absolute;
-  top: -50%;
-  /* Oversize to allow movement without showing edges */
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -128,12 +127,29 @@ body {
   }
 }
 
+
 .glass-container {
   position: relative;
   display: flex;
   gap: 20px;
   align-items: center;
   /* Add some floating blurred shapes for depth if desired, handled by body bg for now */
+}
+
+/* Glass Header Styles - Correctly placed */
+
+/* Glass Header Styles */
+.glass-header {
+  width: 100%;
+  padding: 20px 30px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
 .glass-card {
@@ -148,12 +164,10 @@ body {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow:
-    0 8px 32px 0 rgba(31, 38, 135, 0.15),
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15),
     inset 0 0 0 1px rgba(255, 255, 255, 0.4);
   display: grid;
-  grid-template-areas:
-    "badge"
+  grid-template-areas: "badge"
     "image"
     "content"
     "footer";
@@ -442,23 +456,4 @@ body {
   transition: flex-basis 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
     max-width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
     width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* Icon Toggling */
-.expand-button .icon-expand,
-.expand-button .icon-collapse {
-  transition: opacity 0.3s ease;
-  transform-origin: center;
-}
-
-.expand-button .icon-collapse {
-  opacity: 0;
-}
-
-.expand-button.active .icon-expand {
-  opacity: 0;
-}
-
-.expand-button.active .icon-collapse {
-  opacity: 1;
 }
