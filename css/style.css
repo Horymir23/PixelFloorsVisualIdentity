@@ -1,2 +1,549 @@
-/* Main Stylesheet */
-/* Add your global styles here */
+/* Glassmorphism Card CSS */
+@font-face {
+    font-family: 'Wotfard';
+    src: url('../assets/fonts/Wotfard/Wotfard-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Wotfard';
+    src: url('../assets/fonts/Wotfard/Wotfard-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Wotfard';
+    src: url('../assets/fonts/Wotfard/Wotfard-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --glass-blur: 60px;
+    --text-color: #1e0030;
+    --text-muted: rgba(255, 255, 255, 0.8);
+    --accent-green: #2ecc71;
+    /* Fallback */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Removed static background image, using .background-animation instead */
+    background: var(--phantom-mist);
+    font-family: 'Wotfard', sans-serif;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    /* Prevent horizontal scroll from overflowing animations */
+}
+
+/* Background Animation */
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* overflow: hidden; Removed to let animation extend outside section */
+}
+
+.bg-layer {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    /* calmFade for opacity, calmMove for transformation */
+    animation: calmFade 12s infinite linear;
+}
+
+.layer-1 {
+    background-image: url('../assets/images/svg/Aura 002.svg');
+    animation-delay: 0s;
+    /* Individual movement timing */
+    animation: calmFade 12s infinite linear, calmMove 15s infinite ease-in-out alternate;
+}
+
+.layer-2 {
+    background-image: url('../assets/images/svg/Aura 003.svg');
+    animation-delay: 4s;
+    animation: calmFade 12s infinite linear 4s, calmMove 17.5s infinite ease-in-out alternate-reverse;
+}
+
+.layer-3 {
+    background-image: url('../assets/images/svg/Aura 004.svg');
+    animation-delay: 8s;
+    animation: calmFade 12s infinite linear 8s, calmMove 14s infinite ease-in-out alternate;
+}
+
+@keyframes calmFade {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    33% {
+        opacity: 1;
+    }
+
+    43% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes calmMove {
+    0% {
+        transform: scale(1) translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: scale(1.1) translate(2%, 1%) rotate(2deg);
+    }
+
+    66% {
+        transform: scale(1.05) translate(-1%, -2%) rotate(-1deg);
+    }
+
+    100% {
+        transform: scale(1.1) translate(-2%, 1%) rotate(1deg);
+    }
+}
+
+
+.glass-container {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    /* Add some floating blurred shapes for depth if desired, handled by body bg for now */
+}
+
+/* Glass Header Styles - Correctly placed */
+
+/* Glass Header Styles */
+.glass-header {
+    width: 100%;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.glass-card {
+    position: relative;
+    width: 100%;
+    min-height: 550px;
+    height: auto;
+    padding: 40px 30px 30px;
+    background: rgba(255, 255, 255, 0.25);
+    /* More opaque for light bg */
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+    display: grid;
+    grid-template-areas: "badge"
+        "image"
+        "content"
+        "footer";
+    grid-template-rows: auto auto 1fr auto;
+    overflow: hidden;
+    transition: background 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Explicitly transition only visual props to avoid height jump animation */
+}
+
+.glass-card.expanded {
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.25);
+    z-index: 10;
+    padding: 0;
+    /* Remove padding to let image touch edges */
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "image badge"
+        "image content"
+        "image footer";
+}
+
+.glass-card.expanded .image-strip {
+    grid-area: image;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card.expanded .badge {
+    grid-area: badge;
+    margin: 40px 30px 30px 30px;
+    /* Restore padding visually */
+}
+
+.glass-card.expanded .content-bottom {
+    grid-area: content;
+    padding: 0 30px 0 30px;
+    /* Removed vertical padding */
+}
+
+.glass-card.expanded .expand-button-wrapper {
+    padding: 0 30px 30px 30px;
+    /* Match content horizontal, add bottom space */
+}
+
+.glass-card.shrunk {
+    opacity: 0.8;
+    padding: 40px 15px 15px;
+    /* Reduce horizontal padding in narrow column */
+}
+
+.glass-card.shrunk .card-title {
+    /* Smaller title for narrow column */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.glass-card.shrunk .card-description {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.glass-card:hover {
+    /* Only apply hover lift if not interacting with states */
+    /*transform: translateY(-5px);*/
+    box-shadow: 0 15px 40px -5px color-mix(in srgb, var(--phantom-mist), transparent 50%), 0 0 20px -5px color-mix(in srgb, var(--phantom-mist), transparent 50%);
+    border-color: color-mix(in srgb, var(--phantom-mist), transparent 50%);
+}
+
+.glass-card.shrunk:hover {
+    opacity: 1;
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    align-self: flex-start;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--obsidian-ink);
+    grid-area: badge;
+    justify-self: start;
+}
+
+.image-strip {
+    width: 100%;
+    height: 180px;
+    /* Defined height for the strip */
+    margin: 24px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Optional: Add a subtle inner shadow or placeholder effect */
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    /* Ensure image doesn't overflow rounded corners */
+    grid-area: image;
+}
+
+.strip-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Crop vertically, maintain aspect ratio */
+    display: block;
+    /* Remove default inline-block spacing */
+}
+
+.content-bottom {
+    /* Push to bottom removed to stick to image/badge */
+    margin-bottom: 24px;
+    grid-area: content;
+}
+
+/* Headline */
+.card-title {
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+/* Decorative Icon (Grid of Dots) */
+.icon-container {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 4px;
+    padding: 12px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+}
+
+.dot {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+/* Description Text */
+.card-description {
+    font-size: calc(2.5rem / 1.618);
+    line-height: 1.2;
+    margin-bottom: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.glass-card.expanded .card-description {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+}
+
+/* Decorative Stripe */
+.decorative-stripe {
+    position: absolute;
+    bottom: 120px;
+    /* Adjust based on design, maybe distinct from bottom edge */
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.03),
+            rgba(255, 255, 255, 0.03) 2px,
+            transparent 2px,
+            transparent 8px);
+    pointer-events: none;
+    /* Alternatively place it as a separator */
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Lighting/Glare Effect */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right,
+            rgba(255, 255, 255, 0.3) 0%,
+            transparent 40%);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Expand Button */
+.expand-button-wrapper {
+    grid-area: footer;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    /* Padding removed as requested */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.expand-button {
+    /* Position reset to sit in wrapper */
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle border */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.expand-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.expand-button svg {
+    width: 20px;
+    height: 20px;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .glass-card {
+        width: 90%;
+        min-height: auto;
+        padding: 30px 24px;
+    }
+}
+
+/* Transitions for Columns - Adding this to make grid changes smooth */
+.col-md-4,
+.col-md-6,
+.col-md-3 {
+    transition: flex-basis 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        max-width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+        width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Fix for Icon Overlapping */
+.icon-expand,
+.icon-collapse {
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.icon-collapse {
+    display: none;
+}
+
+.expand-button.active .icon-expand {
+    display: none;
+}
+
+.expand-button.active .icon-collapse {
+    display: block;
+}
+
+.expand-button.active {
+    transform: rotate(180deg);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Hero Title Styling */
+/* Hero Title Animation */
+@keyframes auraFlow {
+    0% {
+        background-position: 100% 50%;
+        background-size: 225%;
+    }
+
+    25% {
+        background-position: 80% 55%;
+        background-size: 225%;
+    }
+
+    50% {
+        background-position: 50% 45%;
+        background-size: 250%;
+    }
+
+    75% {
+        background-position: 70% 50%;
+        background-size: 225%;
+    }
+
+    100% {
+        background-position: 60% 57%;
+        background-size: 220%;
+    }
+}
+
+/* Hero Title Styling */
+.hero-title {
+    position: relative;
+    /* Removed absolute positioning */
+    text-align: left;
+    width: auto;
+    z-index: 2;
+    margin: 0;
+    opacity: 1;
+
+    /* Text Masking */
+    background-image: url('../assets/images/Gradients/Gradient for h1.webp');
+    background-color: var(--obsidian-ink);
+
+    /* ZDE UPRAV VELIKOST A POZICI AURY */
+    background-size: 100%;
+    /* Zkus třeba 150% nebo 1200px */
+    background-position: 50% 50%;
+    /* Zkus: left top, 50% 50%, nebo 100px 50px */
+
+    animation: auraFlow 15s ease-in-out infinite alternate;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hero Image Adjustment */
+.hero-section {
+    height: 92vh;
+    padding-top: max(180px, 15vh);
+}
+
+.hero-image {
+    position: absolute;
+    top: max(180px, 15vh);
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}

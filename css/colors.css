@@ -3,46 +3,46 @@
 */
 
 :root {
-    /* =========================================
+  /* =========================================
      1. Brand Primitive Colors
      ========================================= */
 
-    --phantom-mist: #f8f8f8;
-    --obsidian-ink: #1e0030;
-    --mystic-ray: #8c4abe;
-    --magma-pulse: #fe862e;
-    --biolume: #5bfead;
+  --phantom-mist: #f8f8f8;
+  --obsidian-ink: #1e0030;
+  --mystic-ray: #8c4abe;
+  --magma-pulse: #fe862e;
+  --biolume: #5bfead;
 
 
-    /* Neutral Basics */
-    --white: #ffffff;
-    --black: #000000;
+  /* Neutral Basics */
+  --white: #ffffff;
+  --black: #000000;
 
-    /* =========================================
+  /* =========================================
      2. Semantic / Functional Mapping
      ========================================= */
 
-    /* Page & Backgrounds */
-    --bg-body: var(--phantom-mist);
-    --bg-surface: var(--white);
-    --bg-dark: var(--obsidian-ink);
+  /* Page & Backgrounds */
+  --bg-body: var(--phantom-mist);
+  --bg-surface: var(--white);
+  --bg-dark: var(--obsidian-ink);
 
-    /* Typography */
-    --text-primary: var(--obsidian-ink);
-    --text-secondary: rgba(30, 0, 48, 0.7);
-    /* Obsidian Ink @ 70% */
-    --text-inverted: var(--white);
+  /* Typography */
+  --text-primary: var(--obsidian-ink);
+  --text-secondary: rgba(30, 0, 48, 0.7);
+  /* Obsidian Ink @ 70% */
+  --text-inverted: var(--phantom-mist);
 
-    /* Borders */
-    --border-light: rgba(30, 0, 48, 0.1);
-    --border-medium: rgba(30, 0, 48, 0.2);
+  /* Borders */
+  --border-light: rgba(30, 0, 48, 0.1);
+  --border-medium: rgba(30, 0, 48, 0.2);
 
-    /* UI Actions & States */
-    --color-primary: var(--mystic-ray);
-    --color-secondary: var(--magma-pulse);
-    --color-success: var(--biolume);
+  /* UI Actions & States */
+  --color-primary: var(--mystic-ray);
+  --color-secondary: var(--magma-pulse);
+  --color-success: var(--biolume);
 
-    /* Glassmorphism helpers (derived from brand) */
-    --glass-bg: rgba(255, 255, 255, 0.6);
-    --glass-border: rgba(255, 255, 255, 0.4);
+  /* Glassmorphism helpers (derived from brand) */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.4);
 }

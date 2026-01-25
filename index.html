@@ -10,16 +10,11 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/colors.css">
-    <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font_hierarchy.css">
 </head>
 
 <body>
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <img src="assets/images/Segments of pixels floor 4x.webp" alt="Pixel Floors Segments"
-            class="img-fluid w-100 hero-image">
-    </section>
-
     <!-- Simple Glass Header (Floating Fixed) -->
     <div class="fixed-top" style="top: 24px;">
         <div class="container">
@@ -32,24 +27,68 @@
                                 class="header-logo">
                         </div>
 
-                        <!-- Simple Nav/Action -->
-                        <nav>
-                            <a href="glassmorphism.html" class="btn btn-sm btn-outline-dark rounded-pill px-4">Explore
-                                Cards</a>
-                        </nav>
+                        <!-- Navigation & Action -->
+                        <div class="d-flex align-items-center gap-4">
+                            <nav class="d-none d-md-flex align-items-center gap-4">
+                                <a href="#" class="text-decoration-none text-dark small fw-medium">About logo</a>
+                                <a href="fonthierarchy.html" class="text-decoration-none text-dark small fw-medium">Font
+                                    hierarchy</a>
+                                <a href="#" class="text-decoration-none text-dark small fw-medium">Color palette</a>
+                                <a href="#" class="text-decoration-none text-dark small fw-medium">Examples of usage</a>
+                            </nav>
+                            <a href="#" class="btn btn-sm btn-primary rounded-pill px-4">Get Started</a>
+                        </div>
                     </header>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Hero Section -->
+    <section class="hero-section position-relative">
+        <!-- Background Image -->
+        <img src="assets/images/Segments of pixels floor 4x.webp" alt="Pixel Floors Segments" class="hero-image">
+
+        <div class="container position-relative z-1">
+            <div class="row">
+                <div class="col-lg-7 col-md-10">
+                    <!-- Kicker -->
+                    <div class="hero-kicker mb-3 d-flex align-items-center gap-2">
+                        <div class="stars text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <span class="small text-uppercase spacing-1 fw-bold">Loved by innovative
+                            clients</span>
+                    </div>
+
+                    <h1 class="hero-title mb-4">
+                        Step<br>
+                        Into the<br>
+                        Light.
+                    </h1>
+
+                    <p class="hero-description lead mb-0" style="max-width: 500px;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                    </p>
+
+                    <!-- Hero Buttons -->
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="btn btn-primary rounded-pill px-4 py-2">Get Started</a>
+                        <a href="#" class="btn btn-outline-dark rounded-pill px-4 py-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Expand Cards Section -->
     <section class="expand-cards my-5 position-relative">
-        <div class="background-animation">
-            <div class="bg-layer layer-1"></div>
-            <div class="bg-layer layer-2"></div>
-            <div class="bg-layer layer-3"></div>
-        </div>
+
         <div class="container d-flex flex-column justify-content-center align-items-center">
             <div class="row w-100 justify-content-center">
                 <!-- Card 1 -->
@@ -61,7 +100,7 @@
                             <img src="assets/images/illustrations/3d shapes.jpg" alt="3D Shapes" class="strip-img">
                         </div>
                         <div class="content-bottom">
-                            <h1 class="card-title">Intelligent Sensory Tech</h1>
+                            <h3 class="card-title">Intelligent Sensory Tech</h3>
                             <p class="card-description">
                                 Each tile measures pressure and movement dynamics, not just contact. Transform passive
                                 walking into an immersive experience with technology that reacts in real-time to the
@@ -108,7 +147,7 @@
                             <img src="assets/images/illustrations/3d shapes.jpg" alt="3D Shapes" class="strip-img">
                         </div>
                         <div class="content-bottom">
-                            <h1 class="card-title">Don't Just Play. Feel the Game.</h1>
+                            <h3 class="card-title">Don't Just Play. Feel the Game.</h3>
                             <p class="card-description">
                                 Emphasizes the haptic and pressure-sensitive nature of the hardware, distinguishing it
                                 from
@@ -153,7 +192,7 @@
                             <img src="assets/images/illustrations/3d shapes.jpg" alt="3D Shapes" class="strip-img">
                         </div>
                         <div class="content-bottom">
-                            <h1 class="card-title">Beyond<br>the Grid.</h1>
+                            <h3 class="card-title">Beyond<br>the Grid.</h3>
                             <p class="card-description">
                                 Suggests that the technology offers more than just simple square tiles—it offers a
                                 fluid,
@@ -194,6 +233,7 @@
 
     <!-- Scripts -->
     <script src="js/glassmorphism.js"></script>
+    <script src="js/card-interactions.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

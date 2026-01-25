@@ -1,0 +1,60 @@
+:root {
+    --font-base-constant: 104.71696px;
+    --font-ratio: 1.618;
+
+    /* H1 = constant */
+    --h1-size: var(--font-base-constant);
+
+    /* H2 = H1 / ratio */
+    --h2-size: calc(var(--h1-size) / var(--font-ratio));
+
+    /* H3 = H2 / ratio */
+    --h3-size: calc(var(--h2-size) / var(--font-ratio));
+
+    /* H4 = H3 / ratio */
+    --h4-size: calc(var(--h3-size) / var(--font-ratio));
+
+    /* H5 = H4 / ratio */
+    --h5-size: calc(var(--h4-size) / var(--font-ratio));
+
+    /* H6 = H5 / ratio */
+    --h6-size: calc(var(--h5-size) / var(--font-ratio));
+}
+
+h1 {
+    font-family: 'Wotfard', sans-serif;
+    font-weight: 700;
+    font-size: var(--h1-size);
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-family: 'Wotfard', sans-serif;
+    font-weight: 600;
+    font-size: var(--h2-size);
+}
+
+h3 {
+    font-family: 'Wotfard', sans-serif;
+    font-weight: 600;
+    font-size: var(--h3-size);
+}
+
+h4 {
+    font-family: 'Wotfard', sans-serif;
+    font-weight: 600;
+    font-size: var(--h4-size);
+}
+
+h5 {
+    font-family: 'Wotfard', sans-serif;
+    font-weight: 600;
+    font-size: var(--h5-size);
+}
+
+h6 {
+    font-family: 'Wotfard', sans-serif;
+    font-weight: 600;
+    font-size: var(--h6-size);
+}
