@@ -116,14 +116,14 @@
                                     style="width: 3px; height: 80%; border-radius: 2px;"></div>
                                 <div class="wave-bar bg-dark opacity-25"
                                     style="width: 3px; height: 40%; border-radius: 2px;"></div>
-                                <div class="text-muted ms-2 fw-medium" style="font-size: 0.7rem; line-height: 1;">2:34
-                                </div>
+                                <div id="audioTime" class="text-muted ms-2 fw-medium"
+                                    style="font-size: 0.7rem; line-height: 1;">--:--</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Audio Source -->
-                    <audio id="storyAudio" preload="none">
+                    <audio id="storyAudio" preload="metadata">
                         <source src="https://pub-d79f0325ed9c472b9914ac1979a63cb8.r2.dev/about-logo.mp3"
                             type="audio/mpeg">
                     </audio>
@@ -136,75 +136,165 @@
                 </div>
             </div>
 
-            <!-- The Concept -->
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="p-5 bg-white border rounded-5 d-flex align-items-center justify-content-center shadow-sm"
-                        style="min-height: 400px; position: relative;">
-                        <!-- Carousel -->
-                        <div id="logoCarousel"
-                            class="carousel carousel-dark slide w-100 h-100 d-flex align-items-center"
-                            data-bs-ride="carousel">
-                            <!-- Indicators Removed -->
-
-                            <!-- Slides -->
-                            <div class="carousel-inner text-center">
-                                <!-- Slide 1: Symbol -->
-                                <div class="carousel-item active" data-bs-interval="5000">
-                                    <img src="assets/images/Logo%20&%20symbol/Symbol%20with%20gradient.webp"
-                                        alt="The Symbol" class="img-fluid"
-                                        style="height: 200px; width: auto; object-fit: contain;">
-                                    <div class="mt-5 pt-4 text-secondary fw-medium">Brand Symbol</div>
+            <!-- Detailed Logo Analysis -->
+            <div class="row mb-5">
+                <!-- Visual Column (Sticky on Desktop) -->
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="sticky-top" style="top: 120px; z-index: 1;">
+                        <div class="p-5 bg-white border rounded-5 d-flex align-items-center justify-content-center shadow-sm"
+                            style="min-height: 400px; position: relative;">
+                            <!-- Carousel -->
+                            <div id="logoCarousel"
+                                class="carousel carousel-dark slide w-100 h-100 d-flex align-items-center"
+                                data-bs-ride="carousel">
+                                <div class="carousel-inner text-center">
+                                    <!-- Slide 1: Symbol -->
+                                    <div class="carousel-item active" data-bs-interval="5000">
+                                        <img src="assets/images/Logo%20&%20symbol/Symbol%20with%20gradient.webp"
+                                            alt="The Symbol" class="img-fluid"
+                                            style="height: 200px; width: auto; object-fit: contain;">
+                                        <div class="mt-5 pt-4 text-secondary fw-medium">Brand Symbol</div>
+                                    </div>
+                                    <!-- Slide 2: Primary Logo -->
+                                    <div class="carousel-item" data-bs-interval="5000">
+                                        <img src="assets/images/Logo%20&%20symbol/For%20light%20background/Primary%20Pixel%20Floors%20logo.webp"
+                                            alt="Primary Logo" class="img-fluid"
+                                            style="height: 200px; width: auto; object-fit: contain;">
+                                        <div class="mt-5 pt-4 text-secondary fw-medium">Primary Vertical Logo</div>
+                                    </div>
+                                    <!-- Slide 3: Horizontal Logo -->
+                                    <div class="carousel-item" data-bs-interval="5000">
+                                        <img src="assets/images/Logo%20&%20symbol/For%20light%20background/Horizontal%20Pixel%20Floors%20logo.webp"
+                                            alt="Horizontal Logo" class="img-fluid"
+                                            style="height: 200px; width: auto; object-fit: contain;">
+                                        <div class="mt-5 pt-4 text-secondary fw-medium">Horizontal Lockup</div>
+                                    </div>
+                                    <!-- Slide 4: Monochrome -->
+                                    <div class="carousel-item" data-bs-interval="5000">
+                                        <img src="assets/images/Logo%20&%20symbol/For%20light%20background/One%20color%20Pixel%20Floors%20logo.webp"
+                                            alt="Monochrome Logo" class="img-fluid"
+                                            style="height: 200px; width: auto; object-fit: contain;">
+                                        <div class="mt-5 pt-4 text-secondary fw-medium">Monochrome Usage</div>
+                                    </div>
                                 </div>
-                                <!-- Slide 2: Primary Logo -->
-                                <div class="carousel-item" data-bs-interval="5000">
-                                    <img src="assets/images/Logo%20&%20symbol/For%20light%20background/Primary%20Pixel%20Floors%20logo.webp"
-                                        alt="Primary Logo" class="img-fluid"
-                                        style="height: 200px; width: auto; object-fit: contain;">
-                                    <div class="mt-5 pt-4 text-secondary fw-medium">Primary Vertical Logo</div>
-                                </div>
-                                <!-- Slide 3: Horizontal Logo -->
-                                <div class="carousel-item" data-bs-interval="5000">
-                                    <img src="assets/images/Logo%20&%20symbol/For%20light%20background/Horizontal%20Pixel%20Floors%20logo.webp"
-                                        alt="Horizontal Logo" class="img-fluid"
-                                        style="height: 200px; width: auto; object-fit: contain;">
-                                    <div class="mt-5 pt-4 text-secondary fw-medium">Horizontal Lockup</div>
-                                </div>
-                                <!-- Slide 4: Monochrome -->
-                                <div class="carousel-item" data-bs-interval="5000">
-                                    <img src="assets/images/Logo%20&%20symbol/For%20light%20background/One%20color%20Pixel%20Floors%20logo.webp"
-                                        alt="Monochrome Logo" class="img-fluid"
-                                        style="height: 200px; width: auto; object-fit: contain;">
-                                    <div class="mt-5 pt-4 text-secondary fw-medium">Monochrome Usage</div>
-                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#logoCarousel"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#logoCarousel"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
-
-                            <!-- Controls -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#logoCarousel"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#logoCarousel"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-1">
-                    <h2 class="display-6 fw-bold mb-4">A Perfect Intersection</h2>
-                    <p class="text-secondary mb-4">
-                        Our symbol sits at the intersection of two worlds. The sharp geometric lines represent the
-                        accuracy and modularity of modern flooring solutions, while the gradient flow signifies
-                        innovation and adaptability.
-                    </p>
-                    <p class="text-secondary">
-                        The shape itself—a stylized isometric tile—nods to both the physical product we install and the
-                        digital tools we use to design it. It represents a block of potential, ready to build something
-                        greater.
-                    </p>
+
+                <!-- Text Column -->
+                <div class="col-lg-7 ps-lg-5">
+                    <!-- 1. Geometrická logika -->
+                    <div class="mb-5">
+                        <h3 class="h4 fw-bold mb-3 text-dark">1. Geometrická logika: Izometrie a Prostorovost</h3>
+                        <p class="text-secondary mb-3">
+                            <strong class="text-dark fw-bold">Izometrická perspektiva:</strong> Celkový kosočtvercový
+                            tvar (rhombus) není 2D čtverec, ale pohled na objekt v 3D prostoru. V technickém kreslení a
+                            architektuře tento úhel definuje „podlahu“ nebo „plošinu“. Mozek diváka tento tvar
+                            automaticky kategorizuje jako povrch, po kterém se chodí, což podvědomě definuje segment
+                            produktu.
+                        </p>
+                        <p class="text-secondary mb-0">
+                            <strong class="text-dark fw-bold">Princip segmentace:</strong> Symbol je složen z pevných
+                            bloků, které se sbíhají do středu. Toto vizualizuje modularitu. Sděluje, že produkt není
+                            monolit, ale skládá se z precizních, do sebe zapadajících dílů, což evokuje inženýrskou
+                            přesnost a servisovatelnost.
+                        </p>
+                    </div>
+
+                    <!-- 2. Anatomie symbolu -->
+                    <div class="mb-5">
+                        <h3 class="h4 fw-bold mb-3 text-dark">2. Anatomie symbolu: Vrstvení (The Hardware Truth)</h3>
+                        <p class="text-secondary mb-3">
+                            Zásadním prvkem loga je přiznaná konstrukce produktu, která využívá kontrastu mezi světlem a
+                            hmotou:
+                        </p>
+                        <ul class="list-unstyled text-secondary">
+                            <li class="mb-3">
+                                <i class="bi bi-circle-fill text-primary me-2 small"></i>
+                                <strong class="text-dark fw-bold">Střed (Aktivní vrstva):</strong> Světlý/barevný
+                                kosočtverec uprostřed není prázdný prostor, ale vrchní nášlapná vrstva
+                                (polykarbonát/sklo). Je to místo interakce – „interface“. V logu je tento prvek
+                                nositelem světla a gradientu, což symbolizuje software, hru a vizuální odezvu.
+                            </li>
+                            <li class="mb-0">
+                                <i class="bi bi-circle-fill text-dark me-2 small"></i>
+                                <strong class="text-dark fw-bold">Okolí (Pasivní tělo):</strong> Tmavé segmenty
+                                obklopující střed reprezentují tělo hardwaru (šasi dlaždice), které je v realitě černé.
+                                Vizuálně tvoří „kolébku“ pro světlo. Psychologicky tento kontrast říká: „Zde je masivní,
+                                odolný základ (tmavá část), který bezpečně nese křehkou magii světla (střed).“
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 3. Dynamika tvaru -->
+                    <div class="mb-5">
+                        <h3 class="h4 fw-bold mb-3 text-dark">3. Dynamika tvaru: Akce a Reakce (The Pulse)</h3>
+                        <p class="text-secondary mb-3">
+                            <strong class="text-dark fw-bold">Odstředivá energie:</strong> Tvar loga působí jako clona
+                            nebo digitální emitor. Šipky (mezery mezi segmenty) směřují od středu ven.
+                        </p>
+                        <p class="text-secondary mb-3">
+                            <strong class="text-dark fw-bold">Sémiotika funkce:</strong> Toto uspořádání vizualizuje
+                            základní smyčku vaší technologie:
+                        </p>
+                        <ol class="text-secondary mb-0">
+                            <li class="mb-1">Input: Tlak na střed (nášlapná vrstva).</li>
+                            <li>Output: Expanze světla do okrajů. Logo není statické; opticky „pulzuje“, což naznačuje
+                                okamžitou odezvu senzorů (nulová latence).</li>
+                        </ol>
+                    </div>
+
+                    <!-- 4. Psychologie barev -->
+                    <div class="mb-5">
+                        <h3 class="h4 fw-bold mb-3 text-dark">4. Psychologie barev: Hmotná vs. Nehmotná složka</h3>
+                        <p class="text-secondary mb-0">
+                            <strong class="text-dark fw-bold">Gradient (Tekuté světlo):</strong> Použití přechodu
+                            (fialová-tyrkysová-oranžová) na vrchní vrstvě symbolizuje proměnlivost. Zatímco hardware je
+                            pevný a neměnný (tmavá/černá), zážitek je fluidní a digitální. Gradient na bílém podkladu
+                            navíc simuluje luminiscenci – logo vypadá, jako by samo svítilo, což potvrzuje povahu
+                            produktu (aktivní zdroj světla, ne pasivní odraz).
+                        </p>
+                    </div>
+
+                    <!-- 5. Typografie -->
+                    <div class="mb-5">
+                        <h3 class="h4 fw-bold mb-3 text-dark">5. Typografie: Nosnost a Bezpečnost</h3>
+                        <ul class="list-unstyled text-secondary mb-0">
+                            <li class="mb-3">
+                                <strong class="text-dark fw-bold">Duktus písma (Weight):</strong> Písmo PIXEL je použito
+                                v řezu Bold. Tloušťka tahů zde neplní jen estetickou funkci, ale sémioticky vyjadřuje
+                                fyzickou nosnost. Tenké písmo by podvědomě vyvolávalo obavu z prasknutí (sklo). Tučné
+                                písmo komunikuje, že podlaha unese vysokou zátěž (až 2000 kg/m² dle technických
+                                specifikací).
+                            </li>
+                            <li class="mb-0">
+                                <strong class="text-dark fw-bold">Zaoblení rohů:</strong> Mírně zaoblené konce písmen
+                                zjemňují technický dojem. Odstraňují agresivitu ostrých hran, čímž činí technologii
+                                vizuálně „bezpečnou“ pro uživatele (od dětí po seniory).
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Shrnutí -->
+                    <div class="p-4 bg-light rounded-4 border-start border-4 border-primary">
+                        <h4 class="h5 fw-bold text-dark mb-2">Shrnutí</h4>
+                        <p class="text-secondary small mb-0 fst-italic">
+                            Logo je schematickým řezem vašeho hardwaru. Ukazuje robustní tmavé tělo, které drží zářící
+                            interaktivní povrch. Mozku diváka tím okamžitě a bez slov sděluje: „Toto je pevná inženýrská
+                            konstrukce, která vytváří světlo.“
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -317,9 +407,30 @@
                 const storyAudio = document.getElementById('storyAudio');
                 const playIcon = document.getElementById('audioPlayIcon');
                 const audioLabel = document.getElementById('audioLabel');
+                const audioTime = document.getElementById('audioTime');
                 const waveBars = document.querySelectorAll('.wave-bar');
 
                 let isPlaying = false;
+
+                // Format time helper
+                function formatTime(seconds) {
+                    const m = Math.floor(seconds / 60);
+                    const s = Math.floor(seconds % 60);
+                    return `${m}:${s.toString().padStart(2, '0')}`;
+                }
+
+                // Update Duration
+                function updateDuration() {
+                    if (storyAudio.duration && storyAudio.duration !== Infinity) {
+                        audioTime.innerText = formatTime(storyAudio.duration);
+                    }
+                }
+
+                storyAudio.addEventListener('loadedmetadata', updateDuration);
+                storyAudio.addEventListener('durationchange', updateDuration);
+
+                // Check immediately in case it's already loaded
+                if (storyAudio.readyState >= 1) updateDuration();
 
                 // Toggle Play/Pause
                 audioTrigger.addEventListener('click', () => {
@@ -349,6 +460,7 @@
                     playIcon.classList.add('ms-1');
                     audioLabel.innerText = "Poslechnout si";
                     stopWaveAnimation();
+                    updateDuration(); // Reset time display to duration
                 });
 
                 // Wave Animation Helpers
