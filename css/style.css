@@ -58,6 +58,48 @@ body {
 }
 
 /* Background Animation */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--obsidian-ink) !important;
+}
+
+h1 .bi,
+h2 .bi,
+h3 .bi,
+h4 .bi,
+h5 .bi,
+h6 .bi,
+h1 i,
+h2 i,
+h3 i,
+h4 i,
+h5 i,
+h6 i,
+h1 .text-primary,
+h2 .text-primary,
+h3 .text-primary,
+h4 .text-primary,
+h5 .text-primary,
+h6 .text-primary,
+h1 .text-danger,
+h2 .text-danger,
+h3 .text-danger,
+h4 .text-danger,
+h5 .text-danger,
+h6 .text-danger,
+h1 .text-success,
+h2 .text-success,
+h3 .text-success,
+h4 .text-success,
+h5 .text-success,
+h6 .text-success {
+    color: inherit !important;
+}
+
 .background-animation {
     position: absolute;
     top: 0;
@@ -626,22 +668,7 @@ body {
     margin: 0;
     opacity: 1;
 
-    /* Text Masking */
-    background-image: url('../assets/images/Gradients/Gradient for h1.webp');
-    background-color: var(--obsidian-ink);
-
-    /* ZDE UPRAV VELIKOST A POZICI AURY */
-    background-size: 100%;
-    /* Zkus třeba 150% nebo 1200px */
-    background-position: 50% 50%;
-    /* Zkus: left top, 50% 50%, nebo 100px 50px */
-
-    animation: auraFlow 15s ease-in-out infinite alternate;
-
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
+    color: var(--obsidian-ink);
 }
 
 /* Hero Image Adjustment */

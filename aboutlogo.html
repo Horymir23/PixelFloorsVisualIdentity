@@ -84,14 +84,55 @@
                         </ol>
                     </nav>
                     <h1 class="display-3 fw-bold mb-4" style="letter-spacing: -2px;">The Story<br>Behind the Logo</h1>
+
+                    <!-- Audio Player Graphic -->
+                    <div id="audioPlayerTrigger"
+                        class="audio-player-trigger d-inline-flex align-items-center gap-3 mb-5 p-2 pe-4 rounded-pill bg-white border shadow-sm cursor-pointer"
+                        style="transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'"
+                        onmouseout="this.style.transform='scale(1)'">
+                        <!-- Play Button -->
+                        <div class="play-icon-wrapper d-flex align-items-center justify-content-center bg-dark text-white rounded-circle"
+                            style="width: 48px; height: 48px; flex-shrink: 0; background-color: var(--obsidian-ink) !important;">
+                            <i id="audioPlayIcon" class="bi bi-play-fill fs-4 ms-1"></i>
+                        </div>
+
+                        <!-- Text & Waveform Context -->
+                        <div class="d-flex flex-column justify-content-center">
+                            <span id="audioLabel" class="fw-bold text-dark small text-uppercase spacing-1 lh-1"
+                                style="font-size: 0.75rem;">Poslechnout si</span>
+                            <div class="d-flex align-items-end gap-1 mt-2" style="height: 16px;">
+                                <!-- Waveform Bars -->
+                                <div class="wave-bar bg-dark opacity-25"
+                                    style="width: 3px; height: 40%; border-radius: 2px;"></div>
+                                <div class="wave-bar bg-dark opacity-50"
+                                    style="width: 3px; height: 70%; border-radius: 2px;"></div>
+                                <div class="wave-bar bg-dark" style="width: 3px; height: 100%; border-radius: 2px;">
+                                </div>
+                                <div class="wave-bar bg-dark opacity-75"
+                                    style="width: 3px; height: 60%; border-radius: 2px;"></div>
+                                <div class="wave-bar bg-dark opacity-25"
+                                    style="width: 3px; height: 30%; border-radius: 2px;"></div>
+                                <div class="wave-bar bg-dark opacity-50"
+                                    style="width: 3px; height: 80%; border-radius: 2px;"></div>
+                                <div class="wave-bar bg-dark opacity-25"
+                                    style="width: 3px; height: 40%; border-radius: 2px;"></div>
+                                <div class="text-muted ms-2 fw-medium" style="font-size: 0.7rem; line-height: 1;">2:34
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audio Source -->
+                    <audio id="storyAudio" preload="none">
+                        <source src="https://pub-d79f0325ed9c472b9914ac1979a63cb8.r2.dev/about-logo.mp3"
+                            type="audio/mpeg">
+                    </audio>
+
+                    <h3 class="h4 fw-bold mb-4">Tvarová psychologie, Geometrie a Sémiotika</h3>
                     <p class="lead text-secondary" style="max-width: 700px;">
-                        Logo Pixel Floors není jen grafickým symbolem, je vizuálním vyjádřením naší filozofie „Digital
-                        Alchemy“. Vzali jsme základní stavební jednotku digitálního světa – pixel – a zbavili ji
-                        těžkopádné „herní“ estetiky. Místo toho jsme logu vdechli život pomocí holografického gradientu,
-                        který symbolizuje naši unikátní technologii Transluminance – schopnost měnit pevnou podlahu v
-                        tekuté, reagující světlo. Čisté linie a absence agresivní černé barvy (strategie Light Mode)
-                        jasně komunikují, že nejde o temnou pouťovou atrakci, ale o sofistikovaný architektonický prvek,
-                        který rozzáří prostor a přinese do něj život</p>
+                        Logo není abstraktním symbolem, ale stylizovaným technickým nákresem (izometrickým řezem)
+                        základní stavební jednotky systému. Využívá principy Gestalt psychologie k tomu, aby mozek
+                        okamžitě dekódoval funkci a povahu produktu bez nutnosti číst text.</p>
                 </div>
             </div>
 
@@ -270,6 +311,71 @@
                     // Restart interval
                     setInterval(showNextLogo, 3000);
                 });
+
+                // Audio Player Logic
+                const audioTrigger = document.getElementById('audioPlayerTrigger');
+                const storyAudio = document.getElementById('storyAudio');
+                const playIcon = document.getElementById('audioPlayIcon');
+                const audioLabel = document.getElementById('audioLabel');
+                const waveBars = document.querySelectorAll('.wave-bar');
+
+                let isPlaying = false;
+
+                // Toggle Play/Pause
+                audioTrigger.addEventListener('click', () => {
+                    if (isPlaying) {
+                        storyAudio.pause();
+                        playIcon.classList.remove('bi-pause-fill');
+                        playIcon.classList.add('bi-play-fill');
+                        playIcon.classList.add('ms-1'); // Re-add margin for play icon center
+                        audioLabel.innerText = "Poslechnout si";
+                        stopWaveAnimation();
+                    } else {
+                        storyAudio.play();
+                        playIcon.classList.remove('bi-play-fill');
+                        playIcon.classList.remove('ms-1'); // Remove margin for pause icon center
+                        playIcon.classList.add('bi-pause-fill');
+                        audioLabel.innerText = "Přehrávám...";
+                        startWaveAnimation();
+                    }
+                    isPlaying = !isPlaying;
+                });
+
+                // Reset on End
+                storyAudio.addEventListener('ended', () => {
+                    isPlaying = false;
+                    playIcon.classList.remove('bi-pause-fill');
+                    playIcon.classList.add('bi-play-fill');
+                    playIcon.classList.add('ms-1');
+                    audioLabel.innerText = "Poslechnout si";
+                    stopWaveAnimation();
+                });
+
+                // Wave Animation Helpers
+                let waveInterval;
+                function startWaveAnimation() {
+                    waveBars.forEach(bar => {
+                        bar.style.transition = 'height 0.2s ease';
+                        // Random initial height
+                        bar.style.height = Math.random() * 80 + 20 + '%';
+                    });
+
+                    waveInterval = setInterval(() => {
+                        waveBars.forEach(bar => {
+                            const randomHeight = Math.random() * 80 + 20 + '%';
+                            bar.style.height = randomHeight;
+                        });
+                    }, 200);
+                }
+
+                function stopWaveAnimation() {
+                    clearInterval(waveInterval);
+                    // Reset to visual steps
+                    const heights = ['40%', '70%', '100%', '60%', '30%', '80%', '40%'];
+                    waveBars.forEach((bar, index) => {
+                        bar.style.height = heights[index] || '50%';
+                    });
+                }
             </script>
 
         </div>
