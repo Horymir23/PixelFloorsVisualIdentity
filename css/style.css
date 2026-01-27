@@ -633,28 +633,47 @@ h6 .text-success {
 /* Hero Title Animation */
 @keyframes auraFlow {
     0% {
-        background-position: 100% 50%;
-        background-size: 225%;
+        background-position: 10% 50%;
     }
 
-    25% {
-        background-position: 80% 55%;
-        background-size: 225%;
+    10% {
+        background-position: 20% 50%;
+    }
+
+    20% {
+        background-position: 30% 50%;
+    }
+
+    30% {
+        background-position: 40% 50%;
+    }
+
+    40% {
+        background-position: 50% 50%;
     }
 
     50% {
-        background-position: 50% 45%;
-        background-size: 250%;
+        background-position: 70% 50%;
     }
 
-    75% {
-        background-position: 70% 50%;
-        background-size: 225%;
+    60% {
+        background-position: 50% 50%;
+    }
+
+    70% {
+        background-position: 40% 50%;
+    }
+
+    80% {
+        background-position: 30% 50%;
+    }
+
+    90% {
+        background-position: 20% 50%;
     }
 
     100% {
-        background-position: 60% 57%;
-        background-size: 220%;
+        background-position: 10% 50%;
     }
 }
 
@@ -668,7 +687,13 @@ h6 .text-success {
     margin: 0;
     opacity: 1;
 
-    color: var(--obsidian-ink);
+    background: linear-gradient(120deg, var(--obsidian-ink) 0%, var(--mystic-ray) 25%, var(--magma-pulse) 50%, var(--biolume) 75%, var(--obsidian-ink) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent !important;
+    animation: auraFlow 8s infinite linear;
 }
 
 /* Hero Image Adjustment */
