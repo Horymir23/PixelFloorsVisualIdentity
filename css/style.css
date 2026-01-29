@@ -778,3 +778,14 @@ h6 .text-success {
 .dont-outline {
     filter: drop-shadow(0px 0px 1px black);
 }
+
+/* Hero Title 2 Custom Gradient */
+.hero-title-2 {
+    background: url('../assets/images/Gradients/Gradient for h1 2.webp');
+    background-size: 200% auto;
+    background-position: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent !important;
+}
